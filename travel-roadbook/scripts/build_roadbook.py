@@ -47,6 +47,23 @@ ORNAMENTS = {
                    '<circle cx="0" cy="9" r="1.2" fill="currentColor"/>'
                    '<circle cx="22" cy="9" r="1.2" fill="currentColor"/>'),
     },
+    "kazakh": {
+        "hero_viewbox": "0 0 160 112",
+        # 哈萨克毡房：圆顶、顶圈（shangyrak）、屋杆、网格围墙、门
+        "hero": [
+            "M28 62 Q80 8 132 62",
+            "M80 21 L42 58 M80 21 L60 56 M80 21 L100 56 M80 21 L118 58",
+            "M28 62 H132",
+            "M30 62 V98 M130 62 V98 M22 98 H138",
+            "M36 66 L50 94 M50 66 L36 94 M54 66 L66 94 M66 66 L54 94",
+            "M94 66 L106 94 M106 66 L94 94 M110 66 L124 94 M124 66 L110 94",
+            "M71 98 V72 H89 V98",
+        ],
+        "hero_circles": [[80, 21, 5]],
+        # 羊角纹
+        "border": ('<path d="M11 11 C11 4 4 3 4 7 C4 9.5 7 9.5 7 7.5" fill="none" stroke="currentColor" stroke-width="1.3"/>'
+                   '<path d="M11 11 C11 4 18 3 18 7 C18 9.5 15 9.5 15 7.5" fill="none" stroke="currentColor" stroke-width="1.3"/>'),
+    },
     "none": {"hero": [], "hero_circles": [], "border": ""},
 }
 

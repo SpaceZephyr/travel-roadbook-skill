@@ -13,7 +13,7 @@
 
 ## 路书网页模块
 
-- 开头：标题 + 目的地文化线描装饰（泰国：寺庙山墙、莲花苞纹样）
+- 开头：标题 + 目的地文化线描装饰（泰国：寺庙山墙、莲花苞纹样；新疆伊犁：毡房、羊角纹）
 - 七天一览：每天在哪座城、哪天坐飞机、哪天有夜市
 - 路线示意图：城市按真实经纬度摆放，标出每段航程
 - 高德地图"一键打开行程"按钮（含微信内打开指引、链接复制兜底）
@@ -23,7 +23,9 @@
 - 每日门票条形图 + 明细表、整趟花费区间图
 - 出发前清单（带截止日期，可勾选）、穿着建议、注意事项、资料来源
 
-示例：`travel-roadbook/assets/roadbook.sample.json`（2026 国庆，广州出发，清迈 4 天 + 曼谷 3 天）。
+示例：
+- `travel-roadbook/assets/roadbook.sample.json`：出境游，2026 国庆广州出发，清迈 4 天 + 曼谷 3 天
+- `travel-roadbook/assets/roadbook.xinjiang.json`：国内包车，2026 国庆深圳出发，独库公路 + 那拉提 + 伊宁 + 赛里木湖
 
 ## 目录结构
 
@@ -32,14 +34,15 @@ travel-roadbook/
 ├── SKILL.md                        # 技能入口：触发条件与 6 步流程
 ├── references/
 │   ├── amap-tools.md               # 高德 MCP 工具链、lineList 结构、实测坑（含境外无数据）、HTTP 直连
-│   ├── planning-rules.md           # 行程合理性校验规则（含出境游）
+│   ├── planning-rules.md           # 行程合理性校验规则（含出境游、季节性道路）
 │   ├── roadbook-spec.md            # 需求清单、JSON 字段、发布与交付流程
 │   └── design-guide.md             # 页面设计原则、文化装饰、配色校验、图表与长图
 ├── scripts/
 │   ├── build_roadbook.py           # 路书 JSON → 自包含 HTML（--fragment 输出 Artifact 片段）
 │   └── make_qr.py                  # 发布链接 → 二维码 PNG
 └── assets/
-    └── roadbook.sample.json        # 路书数据示例（泰国 7 天）
+    ├── roadbook.sample.json        # 路书数据示例（泰国 7 天）
+    └── roadbook.xinjiang.json      # 路书数据示例（新疆伊犁 7 天）
 ```
 
 ## 安装
@@ -62,7 +65,7 @@ python3 travel-roadbook/scripts/build_roadbook.py travel-roadbook/assets/roadboo
 ## 设计原则
 
 - 里程、天气、门票价格必须来自工具或可追溯来源，不编造；超出预报窗口的天气、浮动的票价、估算的预算显式标注口径。
-- 页面简约：黑灰加 1–2 个区域色，颜色只用来区分真实类别；目的地特色靠少量线描装饰和当地文字，不靠色块。
+- 页面简约：黑灰加 1–3 个区域色，颜色只用来区分真实类别；目的地特色靠少量线描装饰和当地文字，不靠色块。
 - 非自驾场景（高铁/飞机 + 当地租车、公共交通）与出境游同样适用，写法见 `references/`。
 
 ## License
