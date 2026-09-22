@@ -48,3 +48,21 @@
 3. **里程不要信用户给的表格或直线估算**，必须逐段驾车实测。真实案例：用户表"丽江→广南 480km"，实测 863km（低估 80%）；"广南→阳朔 380km"，实测 804km（低估 112%）。
 4. 景区节点 geo 不到时，改用景区大门/游客中心全称或就近城镇锚点。
 5. 驾车时长是理想路况，节假日需人工上浮（拥堵省界、热门景区周边按 +20%~40% 估）。
+6. **境外目的地查不到数据**（2026-09 实测泰国）：`maps_text_search`、`maps_geo` 搜"大皇宫"返回的是深圳的地点；
+   `maps_around_search`、`maps_regeocode` 用曼谷坐标查返回空；`maps_weather` 查"曼谷"返回 null。因此：
+   - 境外的里程、天气、景点要改用网络搜索，并注明来源；天气用历年同期气候。
+   - 行程地图仍可生成：`maps_schema_personal_map` 要求每个点都有 `poiId`，境外点填占位值 `"0"`，
+     经纬度自己核实后填（境外不做 GCJ-02 偏移，直接用 WGS-84）。国内的点（如出发机场）照常用 text_search 的真实 poiId。
+     这样生成的链接在电脑上无法验证，交付时要请用户在手机上试一下，并在页面注明"位置可能差几百米"。
+
+## 没有加载 MCP 工具时
+
+高德 MCP 刚配置、当前会话还没加载时，可以直接用 HTTP 调用（JSON-RPC）：
+
+```bash
+curl -s -X POST "https://mcp.amap.com/mcp?key=<KEY>" \
+  -H "Content-Type: application/json" -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"maps_weather","arguments":{"city":"成都"}}}'
+```
+
+返回是 SSE 格式，取 `data:` 行解析 JSON，结果在 `result.content[].text`。`method` 换成 `tools/list` 可以看全部工具和参数。
